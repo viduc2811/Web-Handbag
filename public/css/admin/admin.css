@@ -1,0 +1,16 @@
+body {
+    font-family: Arial, sans-serif;
+}
+.sidebar {
+    height: 100vh;
+    background-color:pink;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 220px;
+    padding-top: 60px;
+}
+.admin-narbar {
+    background-color:#6c757d;
+}
