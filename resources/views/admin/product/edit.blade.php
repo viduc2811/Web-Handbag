@@ -69,6 +69,11 @@ referrerpolicy="origin"></script>
             </div>
 
             <div class="form-group">
+                        <label for="menu">Số lượng</label>
+                        <input type="number" name="product_quantity" value="{{ $product->product_quantity }}"  class="form-control" >
+                    </div>
+
+            <div class="form-group">
                 <label for="menu">Ảnh Sản Phẩm</label>
                 <input type="file"  class="form-control" id="upload">
                 <div id="image_show">

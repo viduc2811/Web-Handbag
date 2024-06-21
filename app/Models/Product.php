@@ -15,6 +15,7 @@ class Product extends Model
         'thumb',
         'product_price',
         'price_sale',
+        'product_quantity',
         'active'
         
     ];

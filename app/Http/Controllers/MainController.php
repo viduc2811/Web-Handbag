@@ -22,7 +22,7 @@ class MainController extends Controller
 }
     public function index()
     {
-        return view('main', [
+        return view('home', [
             'title' => 'HandBags Store',
             'sliders' => $this->slider->show(),
             'menus' => $this->menu->show(),

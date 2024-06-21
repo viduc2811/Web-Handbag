@@ -19,6 +19,6 @@ class Menu extends Model
 
     public function products()
     {
-        return $this->hasMany(Product::class, 'menu_id');
+        return $this->hasMany(Product::class, 'menu_id','menu_id');
     }
 }

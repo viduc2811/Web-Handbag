@@ -23,6 +23,7 @@
                 <td>{{ $product->menu->menu_name }}</td>
                 <td>{{ $product->product_price }}</td>
                 <td>{{ $product->price_sale }}</td>
+                <td>{{ $product->product_quantity }}</td>
                 <td>{!! \App\Helpers\Helper::active($product->active) !!}</td>
                 <td>{{ $product->updated_at }}</td>
                 <td>

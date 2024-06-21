@@ -46,6 +46,7 @@ class ProductAdminService
                 'product_description' => $request->product_description,
                 'product_content' => $request->product_content,
                 'thumb' => $request->thumb,
+                'product_quantity' => $request->product_quantity,
                 'active' => $request->active,
             ]);
 

@@ -63,6 +63,13 @@ referrerpolicy="origin"></script>
                 <textarea name="product_content" id="product_content" class="form-control">{{ old('product_content') }}</textarea>
             </div>
 
+            <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="menu">Số lượng</label>
+                        <input type="number" name="ptoduct_quantity" value="{{ old('product_quantity') }}"  class="form-control" >
+                    </div>
+                </div>
+
             <div class="form-group">
                 <label for="menu">Ảnh Sản Phẩm</label>
                 <input type="file"  class="form-control" id="upload">

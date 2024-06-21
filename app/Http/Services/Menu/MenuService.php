@@ -65,10 +65,13 @@ class MenuService
 
         return false;
     }
+
     public function getId($id)
     {
         return Menu::where('menu_id', $id)->firstOrFail();
+        dd($menu);
     }
+
     public function getProduct($menu, $request)
     {
         $query = $menu->products()

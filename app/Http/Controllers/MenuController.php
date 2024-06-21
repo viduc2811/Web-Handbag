@@ -19,7 +19,7 @@ class MenuController extends Controller
         $menu = $this->menuService->getId($id);
         $products = $this->menuService->getProduct($menu, $request);
 
-        return view('main', [
+        return view('menu', [
             'title' => $menu->menu_name,
             'products' => $products,
             'menu'  => $menu
