@@ -23,7 +23,7 @@ class Helper
                 }
                 $html .= '
                     <tr>
-                        <td>' . $menu->menu_id . '</td>
+                        <td>' . $key + 1 . '</td>
                         <td>' . $char . $menu->menu_name . '</td>
                         <td>' . $parentName . '</td>
                         <td>' . $menu->updated_at . '</td>

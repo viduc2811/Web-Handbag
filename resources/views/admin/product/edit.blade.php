@@ -8,6 +8,7 @@ referrerpolicy="origin"></script>
   tinymce.init({
     selector: 'textarea', // Replace this CSS selector to match the placeholder element for TinyMCE
     plugins: 'code table lists',
+    forced_root_block: false,
     toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table',
     branding: false
   });

@@ -16,7 +16,7 @@
         <tbody>
         @foreach($sliders as $key => $slider)
             <tr>
-                <td>{{ $slider->slider_id }}</td>
+                <td>{{ $key + 1 }}</td>
                 <td>{{ $slider->name }}</td>
                 <td>{{ $slider->url }}</td>
                 <td><a href="{{ $slider->thumb }}" target="_blank">

@@ -26,6 +26,6 @@ class AppServiceProvider extends ServiceProvider
         View::composer('header', MenuComposer::class);
         View::composer('main', MenuComposer::class);
         View::composer('main', SliderComposer::class);
-        // View::composer('cart', CartComposer::class);
+        View::composer('cart', CartComposer::class);
     }
 }

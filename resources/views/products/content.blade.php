@@ -9,7 +9,7 @@
 
             <a href="/danh-muc/{{ $product->menu->menu_id }}-{{ Str::slug($product->menu->menu_name) }}.html"
                class="stext-109 cl8 hov-cl1 trans-04">
-                {{ $product->menu->prodcut_name }}
+                {{ $product->menu->menu_name }}
                 <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
             </a>
 
@@ -79,7 +79,7 @@
 						</span>
 
                         <p class="stext-102 cl3 p-t-23">
-                            {{ $product->product_description }}
+                            {!!$product->product_description !!}
                         </p>
 
                         <!--  -->
@@ -167,9 +167,8 @@
                         <!-- - -->
                         <div class="tab-pane fade show active" id="description" role="tabpanel">
                             <div class="how-pos2 p-lr-15-md">
-                                <p class="stext-102 cl6">
-                                    {!! $product->product_content !!}
-                                </p>
+                            {!!$product->product_content!!}
+
                             </div>
                         </div>
 

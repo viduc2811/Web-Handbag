@@ -8,6 +8,7 @@ referrerpolicy="origin"></script>
   tinymce.init({
     selector: 'textarea', // Replace this CSS selector to match the placeholder element for TinyMCE
     plugins: 'code table lists',
+    forced_root_block: '',
     toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table',
     branding: false
   });
@@ -66,7 +67,7 @@ referrerpolicy="origin"></script>
             <div class="col-md-6">
                     <div class="form-group">
                         <label for="menu">Số lượng</label>
-                        <input type="number" name="ptoduct_quantity" value="{{ old('product_quantity') }}"  class="form-control" >
+                        <input type="number" name="product_quantity" value="{{ old('product_quantity') }}"  class="form-control" >
                     </div>
                 </div>
 

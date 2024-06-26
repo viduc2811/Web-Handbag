@@ -4,7 +4,7 @@
 <div class="container">
         <div class="row mb-3" style="height:30px;">
             <div class="col">
-                <h2 class="float-left">Danh sách danh mục</h2>
+                <h2 class="float-left">Danh mục sản phẩm</h2>
             </div>
             <div class="col text-right" style="">
                 <a class="btn btn-primary" href="{{ route('menus.add') }}">

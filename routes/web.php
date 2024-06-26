@@ -49,7 +49,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::prefix('sliders')->group(function (){
             Route::get('add', [SliderController::class, 'create']);
-            Route::post('add', [SliderController::class, 'store'])->name('products.add');
+            Route::post('add', [SliderController::class, 'store'])->name('sliders.add');
             Route::get('list', [SliderController::class, 'index'])->name('sliders.list');
             Route::get('edit/{slider}', [SliderController::class, 'show'])->name('sliders.edit');
             Route::post('edit/{slider}', [SliderController::class, 'update']);
@@ -62,3 +62,8 @@ Route::get('/', [App\Http\Controllers\MainController::class, 'index']);
 Route::post('/services/load-product', [App\Http\Controllers\MainController::class, 'loadProduct']);
 Route::get('danh-muc/{id}-{slug}.html', [App\Http\Controllers\MenuController::class, 'index']);
 Route::get('san-pham/{id}-{slug}.html', [App\Http\Controllers\ProductController::class, 'index']);
+
+Route::post('add-cart', [App\Http\Controllers\CartController::class, 'index']);
+Route::get('carts', [App\Http\Controllers\CartController::class, 'show']);
+Route::get('carts/delete/{cart_id}', [App\Http\Controllers\CartController::class, 'remove']);
+Route::post('carts', [App\Http\Controllers\CartController::class, 'addCart']);
