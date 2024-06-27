@@ -98,7 +98,7 @@ class CartService
             Session::flash('success', 'Đặt Hàng Thành Công');
 
             #Queue
-            SendMail::dispatch($request->input('email'))->delay(now()->addSeconds(2));
+            // SendMail::dispatch($request->input('email'))->delay(now()->addSeconds(2));
 
             Session::forget('carts');
         } catch (\Exception $err) {
@@ -122,8 +122,8 @@ class CartService
         foreach ($products as $product) {
             $data[] = [
                 'customer_id' => $customer_id,
-                'product_id' => $product->id,
-                'product_quantity'   => $carts[$product->id],
+                'product_id' => $product->product_id,
+                'product_quantity'   => $carts[$product->product_id],
                 'product_price' => $product->price_sale != 0 ? $product->price_sale : $product->product_price
             ];
         }
@@ -139,7 +139,7 @@ class CartService
     public function getProductForCart($customer)
     {
         return $customer->carts()->with(['product' => function ($query) {
-            $query->select('id', 'product_name', 'thumb');
+            $query->select('product_id', 'product_name', 'thumb');
         }])->get();
     }
 }

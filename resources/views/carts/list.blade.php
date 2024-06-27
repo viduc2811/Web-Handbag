@@ -1,7 +1,7 @@
 @extends('main')
 
 @section('content')
-    <form class="bg0 p-t-130 p-b-85" method="post" action="/checkout">
+    <form class="bg0 p-t-130 p-b-85" method="post" action="">
         @csrf
         @include('admin.alert')
 

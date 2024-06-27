@@ -52,7 +52,7 @@ class CartController extends Controller
         return redirect('/carts');
     }
 
-    public function order(Request $request)
+    public function addCart(Request $request)
     {
         $this->cartService->addCart($request);
 
