@@ -53,7 +53,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{ route('customers') }}">
                                 <i class="fas fa-file-alt"></i> Hóa Đơn
                             </a>
                         </li>
@@ -63,8 +63,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-file-alt"></i> Phản Hồi
+                            <a class="nav-link" href="{{ route('users') }}">
+                            <i class="fas fa-users"></i> Người dùng
                             </a>
                         </li>
                     </ul>

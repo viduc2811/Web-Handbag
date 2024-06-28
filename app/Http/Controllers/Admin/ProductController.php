@@ -93,4 +93,15 @@ class ProductController extends Controller
 
         return response()->json([ 'error' => true ]);
     }
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        // Xử lý tìm kiếm sản phẩm với từ khóa $query
+        $products = Product::where('product_name', 'like', '%' . $query . '%')
+                           ->get();
+
+        // Trả về view hiển thị kết quả tìm kiếm
+        return view('admin.products.search', compact('products', 'query'))->with('title', 'Tìm kiếm');
+    }
 }

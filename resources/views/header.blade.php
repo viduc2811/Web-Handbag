@@ -14,15 +14,25 @@
         .logo span {
             color: #e74c3c;
         }
+        .wrap-menu-desktop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000; 
+            background-color: #fff; 
+            padding: 10px 0; 
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+        }
+
+        .modal-search-header{
+            height:30%;
+        }
     </style>
     
-    <div class="container-menu-desktop">
-        <div class="wrap-menu-desktop">
+    <div class="container-menu-desktop" >
+        <div class="wrap-menu-desktop ">
             <nav class="limiter-menu-desktop container">
-                <!-- Logo desktop -->
-                <!-- <a href="#" class="logo">
-                    <img src="/template/images/icons/logo-01.jpg" alt="IMG-LOGO">
-                </a> -->
                 <div class="logo">Hand<span>Bags</span> Store</div>
                 <!-- Menu desktop -->
                 <div class="menu-desktop">
@@ -57,7 +67,7 @@
                 <i class="zmdi zmdi-search"></i>
             </div>
             <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
-                 data-notify="2">
+                 data-notify="{{ !is_null(\Session::get('carts')) ? count(\Session::get('carts')) : 0 }}">
                 <i class="zmdi zmdi-shopping-cart"></i>
             </div>
         </div>
@@ -72,26 +82,29 @@
     <!-- Menu Mobile -->
     <div class="menu-mobile">
         <ul class="main-menu-m">
-            <li class="active-menu"><a href="/">Trang Chủ</a></li>
-            <li><a href="#">Danh Mục 1</a></li>
-            <li><a href="#">Danh Mục 2</a></li>
-            <li><a href="#">Danh Mục 3</a></li>
-            <li><a href="#">Liên Hệ</a></li>
+            <li class="active-menu"><a href="/">Trang Chủ</a> </li>
+            {!! $menusHtml !!}
+            <li>
+                <a href="contact.html">Liên Hệ</a>
+            </li>
+
         </ul>
     </div>
 
     <!-- Modal Search -->
-    <div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
+    <div class="modal-search-header flex-c-m trans-04 js-hide-modal-search" id="modal-search-header">
         <div class="container-search-header">
             <button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
                 <img src="/template/images/icons/icon-close2.png" alt="CLOSE">
             </button>
-            <form class="wrap-search-header flex-w p-l-15">
-                <button class="flex-c-m trans-04">
-                    <i class="zmdi zmdi-search"></i>
-                </button>
-                <input class="plh3" type="text" name="search" placeholder="Search...">
-            </form>
-        </div>
+            <form action="{{ route('search') }}" method="GET" class="mb-4">
+            <div class="input-group">
+                <input type="text" name="query" class="form-control" placeholder="Nhập từ khóa tìm kiếm" required value="{{ request()->input('query', '') }}">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-search"></i></button>
+                </div>
+            </div>
+        </form>
     </div>
+</div>
 </header>

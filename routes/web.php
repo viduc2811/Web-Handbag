@@ -19,6 +19,8 @@ use  \App\Http\Controllers\Admin\MainController;
 use  \App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\Users\UserController;
+use App\Http\Controllers\SearchController;
 
 Route::get('admin/users/login', [LoginController::class,'index'])->name('login');
 Route::post('admin/users/login/store', [LoginController::class,'store']);
@@ -28,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->group(function (){
         Route::get('main', [MainController::class,'index'])->name('admin');
         Route::get('/', [MainController::class,'index']);
+        Route::get('users', [UserController::class,'index'])->name('users');
         
         Route::prefix('menus')->group(function (){
             Route::get('add', [MenuController::class,'create'])->name('menus.add');
@@ -36,6 +39,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('edit/{menu}', [MenuController::class,'show']);
             Route::post('edit/{menu}', [MenuController::class, 'update'])->name('menus.edit');
             Route::DELETE('destroy', [MenuController::class, 'destroy']);
+            Route::get('search', [MenuController::class, 'search'])->name('menus.search');
         });
 
         Route::prefix('products')->group(function (){
@@ -45,6 +49,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('edit/{product}', [ProductController::class, 'show'])->name('products.edit');
             Route::post('edit/{product}', [ProductController::class, 'update']);
             Route::DELETE('destroy', [ProductController::class, 'destroy']);
+            Route::get('search', [MenuController::class, 'search'])->name('products.search');
         });
 
         Route::prefix('sliders')->group(function (){
@@ -57,7 +62,7 @@ Route::middleware(['auth'])->group(function () {
         });
         Route::post('upload/services', [\App\Http\Controllers\Admin\UploadController::class, 'store']);
         
-        Route::get('customers', [\App\Http\Controllers\Admin\CartController::class, 'index']);
+        Route::get('customers', [\App\Http\Controllers\Admin\CartController::class, 'index'])->name('customers');;
         Route::get('customers/view/{customer}', [\App\Http\Controllers\Admin\CartController::class, 'show']);
     });
 });
@@ -71,3 +76,7 @@ Route::get('carts', [App\Http\Controllers\CartController::class, 'show']);
 Route::post('update-cart', [App\Http\Controllers\CartController::class, 'update']);
 Route::get('carts/delete/{cart_id}', [App\Http\Controllers\CartController::class, 'remove']);
 Route::post('carts', [App\Http\Controllers\CartController::class, 'addCart']);
+
+// Tìm kiếm sản phẩm
+Route::get('/search', [ProductController::class, 'search'])->name('search');
+

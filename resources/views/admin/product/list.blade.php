@@ -1,6 +1,29 @@
 @extends('admin.main')
 
 @section('content')
+<div class="container">
+
+<div class="row mb-3">
+    <div class="col-12 col-md-6 d-flex align-items-center">
+        <h2 class="mb-0">Sản phẩm</h2>
+    </div>
+    <div class="col-12 col-md-6 d-flex justify-content-end">
+        <form action="{{ route('products.search') }}" method="GET" class="d-flex mb-0">
+            <div class="input-group">
+                <input type="text" name="query" class="form-control" style="width:auto;" placeholder="Nhập từ khóa tìm kiếm">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                </div>
+            </div>
+        </form>
+        <a class="btn btn-primary ml-2" href="{{ route('products.add') }}" style="width:auto;">
+            <i class="fas fa-plus" ></i> Thêm Sản phẩm
+        </a>
+    </div>
+</div>
+
+
+
 
     <table class="table">
         <thead>
@@ -44,4 +67,5 @@
     <div class="card-footer clearfix">
         {!! $products->links() !!}
     </div>
+</div>
 @endsection

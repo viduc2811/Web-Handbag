@@ -63,4 +63,15 @@ class MenuController extends Controller
     ]);
     }
 
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        // Xử lý tìm kiếm sản phẩm với từ khóa $query
+        $menus = Menu::where('menu_name', 'like', '%' . $query . '%')
+                           ->get();
+
+        // Trả về view hiển thị kết quả tìm kiếm
+        return view('admin.menu.search', compact('menus', 'query'))->with('title', 'Tìm kiếm danh mục');
+    }
 }

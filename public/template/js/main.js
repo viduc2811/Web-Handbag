@@ -110,13 +110,22 @@
 
     /*==================================================================
     [ Show / hide modal search ]*/
+
+
     $('.js-show-modal-search').on('click', function(){
-        $('.modal-search-header').addClass('show-modal-search');
+        let modalSearchHeader = document.getElementById('modal-search-header');
+        modalSearchHeader.style.position = "relative";
+        modalSearchHeader.style.margin = "0 auto"; // Center horizontally
+        modalSearchHeader.style.top = "0"; // Top of the screen
+        // $('.modal-search-header').addClass('show-modal-search');
+        modalSearchHeader.style.display="block";
         $(this).css('opacity','0');
     });
 
     $('.js-hide-modal-search').on('click', function(){
-        $('.modal-search-header').removeClass('show-modal-search');
+        let modalSearchHeader = document.getElementById('modal-search-header');
+        // $('.modal-search-header').removeClass('show-modal-search');
+        modalSearchHeader.style.display="none";
         $('.js-show-modal-search').css('opacity','1');
     });
 
