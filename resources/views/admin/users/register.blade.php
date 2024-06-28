@@ -39,19 +39,24 @@
   </div>
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Đăng nhập</p>
+      <p class="login-box-msg">Đăng ký tài khoản mới</p>
       @include('admin.alert')
-      <form action="{{ route('login.store') }}" method="post">
+      <form action="{{ route('register') }}" method="post">
         @csrf
         <div class="form-group">
-          <input type="email" name="email" class="form-control" placeholder="Email" required>
+          <input type="text" name="name" class="form-control" placeholder="Họ và tên" value="{{ old('name') }}" required autofocus>
         </div>
         <div class="form-group">
-          <input type="password" name="password" class="form-control" placeholder="Password" required>
+          <input type="email" name="email" class="form-control" placeholder="Email" value="{{ old('email') }}" required>
         </div>
-       
         <div class="form-group">
-          <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
+          <input type="password" name="password" class="form-control" placeholder="Mật khẩu" required>
+        </div>
+        <div class="form-group">
+          <input type="password" name="password_confirmation" class="form-control" placeholder="Xác nhận mật khẩu" required>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-block">Đăng ký</button>
         </div>
       </form>
     </div>

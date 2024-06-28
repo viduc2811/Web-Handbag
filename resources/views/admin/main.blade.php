@@ -20,8 +20,16 @@
                 </li>
               
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
-                </li>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+                <a class="nav-link" href="{{ route('logout') }}"
+                   onclick="event.preventDefault();
+                   document.getElementById('logout-form').submit();">
+                   <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                </a>
+            </li>
+
             </ul>
         </div>
     </nav>
