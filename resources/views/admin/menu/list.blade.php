@@ -56,7 +56,27 @@
                 </tr>
             </thead>
             <tbody>
-                {!! \App\Helpers\Helper::menu($menus) !!}
+            @foreach($menus as $key=> $menu)
+                <tr>
+                    <td>{{$key + 1 }}</td>
+                    <td>{{ $menu->menu_name }}</td>
+                    <td>
+                        @php
+                            $parentMenu = \App\Models\Menu::find($menu->parent_id);
+                        @endphp
+                        {{ $parentMenu ? $parentMenu->menu_name : 'Không có danh mục cha' }}
+                    </td>
+                    <td>{{ $menu->updated_at }}</td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" href="/admin/menus/edit/{{ $menu->menu_id }}">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="#" class="btn btn-danger btn-sm" onclick="removeRow({{ $menu->menu_id }}, '/admin/menus/destroy')">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            @endforeach
             </tbody>
         </table>
     </div>

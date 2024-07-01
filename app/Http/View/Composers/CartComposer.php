@@ -16,15 +16,17 @@ class CartComposer
 
     public function compose(View $view)
     {
-        $carts = Session::get('carts');
-        if (is_null($carts)) return [];
+        $carts = Session::get('carts', []);
+        $products = [];
 
-        $productId = array_keys($carts);
-        $products = Product::select('product_id', 'product_name', 'product_price', 'price_sale', 'thumb')
-            ->where('active', 1)
-            ->whereIn('product_id', $productId)
-            ->get();
+        if (!empty($carts)) {
+            $productId = array_keys($carts);
+            $products = Product::select('product_id', 'product_name', 'product_price', 'price_sale', 'thumb')
+                ->where('active', 1)
+                ->whereIn('product_id', $productId)
+                ->get();
+        }
 
-        $view->with('products', $products);
+        $view->with('carts', $carts)->with('products', $products);
     }
 }

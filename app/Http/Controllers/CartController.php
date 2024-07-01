@@ -30,19 +30,27 @@ class CartController extends Controller
     public function show()
     {
         $products = $this->cartService->getProduct();
-
+        $cartProducts = Session::get('carts', []); // Lấy giỏ hàng từ session, nếu không có thì trả về mảng rỗng
+    
         return view('carts.list', [
             'title' => 'Giỏ Hàng',
             'products' => $products,
-            'carts' => Session::get('carts')
+            'carts' => $cartProducts // Truyền giỏ hàng vào view
         ]);
     }
 
     public function update(Request $request)
     {
-        $this->cartService->update($request);
+        // $this->cartService->update($request);
 
-        return redirect('/carts');
+        // return redirect('/carts');
+        $result = $this->cartService->update($request);
+
+        if (!$result['success']) {
+            return redirect()->back()->withErrors([$result['message']]);
+        }
+
+        return redirect()->back()->with('success', $result['message']);
     }
 
     public function remove($id = 0)

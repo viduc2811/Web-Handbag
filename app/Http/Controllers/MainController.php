@@ -7,6 +7,7 @@ use App\Http\Services\Slider\SliderService;
 use App\Http\Services\Menu\MenuService;
 use App\Http\Services\Product\ProductService;
 use App\Http\View\Composers\MenuComposer;
+use Illuminate\Support\Facades\Session;
 
 
 class MainController extends Controller
@@ -22,11 +23,13 @@ class MainController extends Controller
 }
     public function index()
     {
+        $cartProducts = Session::get('carts', []);
         return view('home', [
             'title' => 'HandBags Store',
             'sliders' => $this->slider->show(),
             'menus' => $this->menu->show(),
-            'products' => $this->product->get()
+            'products' => $this->product->get(),
+            'carts' => $cartProducts
         ]);
         
     }

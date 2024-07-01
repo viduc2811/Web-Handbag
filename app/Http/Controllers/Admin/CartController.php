@@ -33,4 +33,14 @@ class CartController extends Controller
             'carts' => $carts
         ]);
     }
+    public function order(Customer $customer)
+    {
+        $carts = $this->cart->getProductForCart($customer);
+
+        return view('order', [
+            'title' => 'Đơn Hàng: ' . $customer->name,
+            'customer' => $customer,
+            'carts' => $carts
+        ]);
+    }
 }

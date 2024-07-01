@@ -17,6 +17,14 @@
                         <span class="stext-105 cl3">
 							{!!  \App\Helpers\Helper::price($product->product_price, $product->price_sale)  !!}
                         </span>
+                        <span class="stext-105 cl3">
+                            @if ($product->product_quantity != 0)
+                                
+                            @else
+                                <p style="color:red;">Hết hàng</p>
+                            @endif
+                        </span>
+                        
                     </div>
                 </div>
             </div>

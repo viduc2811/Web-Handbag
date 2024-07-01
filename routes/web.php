@@ -61,7 +61,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('edit/{product}', [ProductController::class, 'show'])->name('products.edit');
             Route::post('edit/{product}', [ProductController::class, 'update']);
             Route::DELETE('destroy', [ProductController::class, 'destroy']);
-            Route::get('search', [MenuController::class, 'search'])->name('products.search');
+            Route::get('search', [ProductController::class, 'search'])->name('products.search');
         });
 
         Route::prefix('sliders')->group(function (){
@@ -90,5 +90,8 @@ Route::get('carts/delete/{cart_id}', [App\Http\Controllers\CartController::class
 Route::post('carts', [App\Http\Controllers\CartController::class, 'addCart']);
 
 // Tìm kiếm sản phẩm
-Route::get('/search', [ProductController::class, 'search'])->name('search');
+Route::get('/search', [\App\Http\Controllers\ProductController::class, 'search'])->name('search');
+
+Route::get('order-detail/{customer}',[\App\Http\Controllers\Admin\CartController::class, 'order'])->name('order-detail/{customer}');
+
 

@@ -48,7 +48,7 @@
                                                     </div>
 
                                                     <input class="mtext-104 cl3 txt-center num-product" type="number"
-                                                           name="num_product[{{ $product->product_id }}]" value="{{ $carts[$product->product_id] }}">
+                                                           name="num_product[{{ $product->product_id }}]" value="{{ $carts[$product->product_id] }}" min="1" max="{{$product->product_quantity}}">
 
                                                     <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                                         <i class="fs-16 zmdi zmdi-plus"></i>
@@ -123,10 +123,12 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <form action="" method="get">
+                            @csrf
                             <button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
                                Đặt Hàng
                             </button>
+                        </form>
                         </div>
                     </div>
                 </div>

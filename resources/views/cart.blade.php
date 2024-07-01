@@ -14,7 +14,7 @@
         <div class="header-cart-content flex-w js-pscroll">
             @php $sumPriceCart = 0; @endphp
             <ul class="header-cart-wrapitem w-full">
-                @if (count($products) > 0)
+                @if (isset($carts) && count($carts) > 0)
                     @foreach($products as $key => $product)
                         @php
                             $price = \App\Helpers\Helper::price($product->product_price, $product->price_sale);
@@ -36,6 +36,10 @@
                             </div>
                         </li>
                     @endforeach
+                    @else
+            <div class="header-cart-content flex-w js-pscroll">
+                <p class="w-full text-left">Giỏ hàng của bạn đang trống.</p>
+            </div>
                 @endif
 
             </ul>
@@ -45,7 +49,6 @@
                     <a href="/carts" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
                         Xem giỏ hàng
                     </a>
-
                 </div>
             </div>
         </div>

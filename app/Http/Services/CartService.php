@@ -18,12 +18,22 @@ class CartService
     {
         $qty = (int)$request->input('num_product');
         $product_id = (int)$request->input('product_id');
+        $product = Product::find($product_id);
+        $product_quantity = $product->product_quantity;
 
         if ($qty <= 0 || $product_id <= 0) {
             Session::flash('error', 'Số lượng hoặc Sản phẩm không chính xác');
             return false;
         }
 
+        if ($product_quantity === null || $product_quantity == 0) {
+            Session::flash('error', 'Sản phẩm này hiện đã hết');
+            return false;
+        }
+        if ($qty >$product_quantity) {
+            Session::flash('error', 'Số lượng sản phẩm không đủ');
+            return false;
+        }
         $carts = Session::get('carts');
         if (is_null($carts)) {
             Session::put('carts', [
@@ -31,18 +41,19 @@ class CartService
             ]);
             return true;
         }
-
+    
         $exists = Arr::exists($carts, $product_id);
         if ($exists) {
             $carts[$product_id] = $carts[$product_id] + $qty;
             Session::put('carts', $carts);
             return true;
         }
-
+    
         $carts[$product_id] = $qty;
         Session::put('carts', $carts);
-
+    
         return true;
+    
         // dd($carts);
     }
 
@@ -60,9 +71,39 @@ class CartService
 
     public function update($request)
     {
+        $requestData = $request->input('num_product');
+        $carts = Session::get('carts');
+        $exceededProducts = [];
+
+        foreach ($requestData as $productId => $quantity) {
+            if (!isset($carts[$productId])) {
+                continue; 
+            }
+
+        
+            $product = Product::find($productId);
+            if ($quantity > $product->product_quantity) {
+                $exceededProducts[] = $product->product_name;
+                continue;
+            }
+
+           
+            $carts[$productId] = $quantity;
+        }
+
+ 
+        if (!empty($exceededProducts)) {
+            return [
+                'success' => false,
+                'message' => 'Số lượng sản phẩm sau đã vượt quá số lượng có sẵn: ' . implode(', ', $exceededProducts)
+            ];
+        }
         Session::put('carts', $request->input('num_product'));
 
-        return true;
+        return [
+            'success' => true,
+            'message' => 'Cập nhật giỏ hàng thành công'
+        ];
     }
 
     public function remove($id)
@@ -93,6 +134,20 @@ class CartService
             ]);
 
             $this->infoProductCart($carts, $customer->id);
+            foreach ($carts as $productId => $quantity) {
+                $product = Product::find($productId);
+                if (!$product) {
+                    throw new \Exception('Sản phẩm không tồn tại.');
+                }
+    
+                if ($product->product_quantity < $quantity) {
+                    throw new \Exception('Số lượng sản phẩm không đủ.');
+                }
+    
+                // Giảm số lượng sản phẩm trong kho
+                $product->product_quantity -= $quantity;
+                $product->save();
+            }
 
             DB::commit();
             Session::flash('success', 'Đặt Hàng Thành Công');

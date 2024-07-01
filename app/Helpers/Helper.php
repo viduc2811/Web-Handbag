@@ -95,6 +95,11 @@ class Helper
     {
         if ($priceSale != 0) return number_format($priceSale);
         if ($price != 0)  return number_format($price);
-        return '<a href="/lien-he.html">Liên Hệ</a>';
+        return '<p>Sản phẩm này hiện đã hết</p>';
     }
+    public static function quantity($product_quantity = 0)
+{
+    return $product_quantity != 0 ? $product_quantity : '<p>Sản phẩm này hiện đã hết</p>';
+}
+
 }

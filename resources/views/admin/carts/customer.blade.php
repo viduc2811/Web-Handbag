@@ -37,7 +37,7 @@
     </table>
 
     <div class="card-footer clearfix">
-        {!! $customers->links() !!}
+        {!! $customers->links('pagination') !!}
     </div>
 @endsection
 

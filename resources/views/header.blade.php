@@ -37,7 +37,7 @@
                 <!-- Menu desktop -->
                 <div class="menu-desktop">
                     <ul class="main-menu">
-                        <li class="active-menu"><a href="/">Trang Chủ</a></li>
+                        <li class="active-menu"><a href="/" style="color:#333;">Trang Chủ</a></li>
                         {!! $menusHtml !!}
                     </ul>
                 </div>

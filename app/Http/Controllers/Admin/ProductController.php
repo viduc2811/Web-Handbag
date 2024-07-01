@@ -102,6 +102,6 @@ class ProductController extends Controller
                            ->get();
 
         // Trả về view hiển thị kết quả tìm kiếm
-        return view('admin.products.search', compact('products', 'query'))->with('title', 'Tìm kiếm');
+        return view('admin.product.search', compact('products', 'query'))->with('title', 'Tìm kiếm');
     }
 }
