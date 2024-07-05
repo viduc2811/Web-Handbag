@@ -137,4 +137,7 @@
     @else
         <div class="text-center"><h2>Giỏ hàng trống</h2></div>
     @endif
+    <a href="{{ route('orders.index') }}" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+                                    Tra Cứu Hóa Đơn
+                                </a>
 @endsection

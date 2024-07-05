@@ -22,6 +22,8 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\Users\UserController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\OrderController;
+
 
 // Đăng nhập
 Route::get('admin/users/login', [LoginController::class,'index'])->name('login');
@@ -32,13 +34,19 @@ Route::post('/logout', function () {
     return redirect('admin/users/login');
 })->name('logout');
 
-// Đăng ký
+// Đăng ký admin
 Route::get('admin/users/register', [RegisterController::class, 'index'])->name('register');
 Route::post('admin/users/register', [RegisterController::class, 'store']);
 
 
-Route::middleware(['auth'])->group(function () {
+//Đăng nhập đăng ký khách hàng
+// Route::get('client/register', [ClientLoginController::class, 'showRegistrationForm'])->name('client.register');
+// Route::post('client/register', [ClientLoginController::class, 'register']);
+// Route::post('client/logout', [ClientLoginController::class, 'logout'])->name('client.logout')->middleware('auth.client');
+Route::get('/client/login', [ClientController::class, 'showLoginForm'])->name('client.login');
+Route::post('/client/login', [ClientController::class, 'store'])->name('client.login.store');
 
+Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->group(function (){
         Route::get('main', [MainController::class,'index'])->name('admin.main');
         Route::get('/', [MainController::class,'index']);
@@ -93,5 +101,10 @@ Route::post('carts', [App\Http\Controllers\CartController::class, 'addCart']);
 Route::get('/search', [\App\Http\Controllers\ProductController::class, 'search'])->name('search');
 
 Route::get('order-detail/{customer}',[\App\Http\Controllers\Admin\CartController::class, 'order'])->name('order-detail/{customer}');
+
+
+Route::get('/orders',[\App\Http\Controllers\OrderController::class, 'index'])->name('orders.index');
+// Route::post('/orders', [\App\Http\Controllers\OrderController::class, 'createOrder'])->name('order.create');
+Route::get('/orders/search', [\App\Http\Controllers\OrderController::class, 'search'])->name('orders.search');
 
 

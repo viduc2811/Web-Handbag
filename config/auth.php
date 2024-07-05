@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'clients' => [
+        'driver' => 'session',
+        'provider' => 'clients',
+    ],
     ],
 
     /*
@@ -69,6 +73,11 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+
+        'clients' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Client::class,
+    ],
     ],
 
     /*
@@ -97,6 +106,12 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'clients' => [
+            'provider' => 'clients',
+            'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ]
     ],
 
     /*
@@ -109,6 +124,29 @@ return [
     | confirmation screen. By default, the timeout lasts for three hours.
     |
     */
+// 'guards' => [
+//     'web' => [
+//         'driver' => 'session',
+//         'provider' => 'users',
+//     ],
+
+//     'clients' => [
+//         'driver' => 'session',
+//         'provider' => 'clients',
+//     ],
+// ],
+
+// 'providers' => [
+//     'users' => [
+//         'driver' => 'eloquent',
+//         'model' => App\Models\User::class,
+//     ],
+
+//     'clients' => [
+//         'driver' => 'eloquent',
+//         'model' => App\Models\Client::class,
+//     ],
+// ],
 
     'password_timeout' => 10800,
 

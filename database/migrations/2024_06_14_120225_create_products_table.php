@@ -18,7 +18,7 @@ return new class extends Migration
             $table->longText('product_content');
             $table->integer('menu_id');
             $table->string('thumb');
-            $table->integer('quantity');
+            // $table->integer('quantity');
             $table->integer('product_price')->nullable();
             $table->integer('price_sale')->nullable();
             $table->integer('active');
