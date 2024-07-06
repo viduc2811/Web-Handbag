@@ -92,11 +92,15 @@ class Helper
         return false;
     }
     public static function price($price = 0, $priceSale = 0)
-    {
-        if ($priceSale != 0) return number_format($priceSale);
-        if ($price != 0)  return number_format($price);
-        return '<p>Sản phẩm này hiện đã hết</p>';
+{
+    if ($priceSale != 0 && $price != 0) {
+        return '<span style="text-decoration: line-through;">' . number_format($price) . '</span> ' . number_format($priceSale). ' đ <span class="sale-label">(Giảm giá)</span>';
     }
+    if ($priceSale != 0) return number_format($priceSale).'đ';
+    if ($price != 0)  return number_format($price).'đ';
+    return '<p>Sản phẩm này hiện đã hết</p>';
+}
+
     public static function quantity($product_quantity = 0)
 {
     return $product_quantity != 0 ? $product_quantity : '<p>Sản phẩm này hiện đã hết</p>';

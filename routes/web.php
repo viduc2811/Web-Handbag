@@ -23,7 +23,8 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\Users\UserController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\OrderController;
-
+use App\Http\Controllers\Client\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Client\Auth\RegisteredUserController;
 
 // Đăng nhập
 Route::get('admin/users/login', [LoginController::class,'index'])->name('login');
@@ -86,10 +87,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('customers/view/{customer}', [\App\Http\Controllers\Admin\CartController::class, 'show']);
     });
 });
-Route::get('/', [App\Http\Controllers\MainController::class, 'index']);
-Route::post('/services/load-product', [App\Http\Controllers\MainController::class, 'loadProduct']);
-Route::get('danh-muc/{id}-{slug}.html', [App\Http\Controllers\MenuController::class, 'index']);
-Route::get('san-pham/{id}-{slug}.html', [App\Http\Controllers\ProductController::class, 'index']);
+
+Route::get('/', [App\Http\Controllers\MainController::class, 'index'])->name('home');
+Route::middleware(['client'])->group(function () {
+    // Route::get('/', [App\Http\Controllers\MainController::class, 'index'])->name('home');
+// Route::post('/services/load-product', [App\Http\Controllers\MainController::class, 'loadProduct']);
+// Route::get('danh-muc/{id}-{slug}.html', [App\Http\Controllers\MenuController::class, 'index']);
+// Route::get('san-pham/{id}-{slug}.html', [App\Http\Controllers\ProductController::class, 'index']);
 
 Route::post('add-cart', [App\Http\Controllers\CartController::class, 'index']);
 Route::get('carts', [App\Http\Controllers\CartController::class, 'show']);
@@ -107,4 +111,34 @@ Route::get('/orders',[\App\Http\Controllers\OrderController::class, 'index'])->n
 // Route::post('/orders', [\App\Http\Controllers\OrderController::class, 'createOrder'])->name('order.create');
 Route::get('/orders/search', [\App\Http\Controllers\OrderController::class, 'search'])->name('orders.search');
 
+});
+// Route::get('/', [App\Http\Controllers\MainController::class, 'index'])->name('/');
+Route::post('/services/load-product', [App\Http\Controllers\MainController::class, 'loadProduct']);
+Route::get('danh-muc/{id}-{slug}.html', [App\Http\Controllers\MenuController::class, 'index']);
+Route::get('san-pham/{id}-{slug}.html', [App\Http\Controllers\ProductController::class, 'index']);
 
+// Route::post('add-cart', [App\Http\Controllers\CartController::class, 'index']);
+// Route::get('carts', [App\Http\Controllers\CartController::class, 'show']);
+// Route::post('update-cart', [App\Http\Controllers\CartController::class, 'update']);
+// Route::get('carts/delete/{cart_id}', [App\Http\Controllers\CartController::class, 'remove']);
+// Route::post('carts', [App\Http\Controllers\CartController::class, 'addCart']);
+
+// // Tìm kiếm sản phẩm
+// Route::get('/search', [\App\Http\Controllers\ProductController::class, 'search'])->name('search');
+
+// Route::get('order-detail/{customer}',[\App\Http\Controllers\Admin\CartController::class, 'order'])->name('order-detail/{customer}');
+
+
+// Route::get('/orders',[\App\Http\Controllers\OrderController::class, 'index'])->name('orders.index');
+// // Route::post('/orders', [\App\Http\Controllers\OrderController::class, 'createOrder'])->name('order.create');
+// Route::get('/orders/search', [\App\Http\Controllers\OrderController::class, 'search'])->name('orders.search');
+
+
+Route::prefix('client')->group(function () {
+    Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('client.login');
+    Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+    Route::get('/register', [RegisteredUserController::class, 'create'])->name('client.register');
+    Route::post('/register', [RegisteredUserController::class, 'store']);
+    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('client.logout'); // Thêm route đăng xuất
+
+});

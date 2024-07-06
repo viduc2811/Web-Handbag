@@ -1,5 +1,9 @@
 <header>
-@php $menusHtml = \App\Helpers\Helper::menus($menus); @endphp
+@php 
+$menusHtml = \App\Helpers\Helper::menus($menus); 
+$isLoggedIn = auth()->check();
+$user = auth()->user();
+@endphp
     <!-- Header desktop -->
     <style>
         .logo {
@@ -43,13 +47,34 @@
                 </div>
                 <!-- Icon header -->
                 <div class="wrap-icon-header flex-w flex-r-m">
-                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
-                        <i class="zmdi zmdi-search"></i>
-                    </div>
-                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
-                         data-notify="{{ !is_null(\Session::get('carts')) ? count(\Session::get('carts')) : 0 }}">
-                        <i class="zmdi zmdi-shopping-cart"></i>
-                    </div>
+                @if ($isLoggedIn)
+                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
+                            <i class="zmdi zmdi-search"></i>
+                        </div>
+                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
+                             data-notify="{{ !is_null(\Session::get('carts')) ? count(\Session::get('carts')) : 0 }}">
+                            <i class="zmdi zmdi-shopping-cart"></i>
+                        </div>
+                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+                                Xin chào, {{ $user->name }}</div>
+                        <a href="{{ route('client.logout') }}" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            Đăng xuất
+                        </a>
+                        <form id="logout-form" action="{{ route('client.logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    @else
+                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
+                            <i class="zmdi zmdi-search"></i>
+                        </div>
+                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
+                             data-notify="{{ !is_null(\Session::get('carts')) ? count(\Session::get('carts')) : 0 }}">
+                            <i class="zmdi zmdi-shopping-cart"></i>
+                        </div>
+                        <a href="{{ route('client.login') }}" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+                            Đăng nhập
+                        </a>
+                    @endif
                 </div>
             </nav>
         </div>
@@ -59,17 +84,29 @@
     <div class="wrap-header-mobile">
         <!-- Logo moblie -->
         <div class="logo-mobile">
-            <a href="index.html"><img src="/template/images/icons/logo-01.png" alt="IMG-LOGO"></a>
+            <div class="logo">Hand<span>Bags</span> Store</div>
         </div>
         <!-- Icon header -->
         <div class="wrap-icon-header flex-w flex-r-m m-r-15">
-            <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
-                <i class="zmdi zmdi-search"></i>
-            </div>
-            <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
-                 data-notify="{{ !is_null(\Session::get('carts')) ? count(\Session::get('carts')) : 0 }}">
-                <i class="zmdi zmdi-shopping-cart"></i>
-            </div>
+        @if ($isLoggedIn)
+                <a href="{{ route('client.logout') }}" class="icon-header-item cl2 hov-cl1 trans-04 p-r-11" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    Đăng xuất
+                </a>
+                <form id="logout-form" action="{{ route('client.logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            @else
+                <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
+                    <i class="zmdi zmdi-search"></i>
+                </div>
+                <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
+                     data-notify="{{ !is_null(\Session::get('carts')) ? count(\Session::get('carts')) : 0 }}">
+                    <i class="zmdi zmdi-shopping-cart"></i>
+                </div>
+                <a href="{{ route('client.login') }}" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+                            Đăng nhập
+                        </a>
+            @endif
         </div>
         <!-- Button show menu -->
         <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
@@ -84,9 +121,6 @@
         <ul class="main-menu-m">
             <li class="active-menu"><a href="/">Trang Chủ</a> </li>
             {!! $menusHtml !!}
-            <li>
-                <a href="contact.html">Liên Hệ</a>
-            </li>
 
         </ul>
     </div>

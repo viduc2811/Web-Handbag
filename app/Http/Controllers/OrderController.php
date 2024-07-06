@@ -83,5 +83,17 @@ public function search(Request $request)
     // return view('orders.list', compact('orders', 'title'));
 }
 
+public function showRevenue()
+{
+    // Lấy dữ liệu doanh thu theo ngày từ database
+    $revenues = DB::table('orders')
+        ->select(DB::raw('DATE(created_at) as date'), DB::raw('SUM(total_amount) as total_revenue'))
+        ->groupBy('date')
+        ->orderBy('date', 'desc')
+        ->get();
+
+    return view('admin.revenue', compact('revenues'));
+}
+
 
 }

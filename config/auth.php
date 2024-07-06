@@ -40,7 +40,7 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'clients' => [
+        'client' => [
         'driver' => 'session',
         'provider' => 'clients',
     ],
@@ -110,7 +110,6 @@ return [
             'provider' => 'clients',
             'table' => 'password_reset_tokens',
             'expire' => 60,
-            'throttle' => 60,
         ]
     ],
 

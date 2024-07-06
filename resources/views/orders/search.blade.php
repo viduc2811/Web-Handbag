@@ -1,12 +1,13 @@
 @extends('main')
-
+<style>
+.custom-margin-top {
+    margin-top: 90px;
+}
+</style>
 @section('content')
     <div class="container">
-        <h2>Đơn Hàng</h2>
-
         <!-- Search Form -->
-        <form action="{{ route('orders.search') }}" method="get">
-            
+        <form action="{{ route('orders.search') }}" method="get" class="custom-margin-top">
             <div class="form-group">
                 <label for="name">Tên Khách Hàng:</label>
                 <input type="text" class="form-control" id="name" name="name" required value="{{ request()->input('query', '') }}">
@@ -21,4 +22,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Tìm Kiếm</button>
         </form>
+    </div>
 @endsection
+
+

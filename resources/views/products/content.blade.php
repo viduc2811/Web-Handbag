@@ -81,7 +81,9 @@
                         <p class="stext-102 cl3 p-t-23">
                         {!! \App\Helpers\Helper::quantity($product->product_quantity) !!}
                         </p>
-
+                        <p class="stext-102 cl3 p-t-23">
+                        {!!$product->product_description!!}
+                        </p>
                         <!--  -->
                         <div class="p-t-33">
                             <div class="flex-w flex-r-m p-b-10">

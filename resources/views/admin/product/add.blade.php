@@ -56,12 +56,12 @@ referrerpolicy="origin"></script>
 
             <div class="form-group">
                 <label>Mô Tả </label>
-                <textarea name="product_description" class="form-control">{{ old('product_description') }}</textarea>
+                <textarea name="product_description" id="product_description" class="form-control">{!! old('product_description') !!}</textarea>
             </div>
 
             <div class="form-group">
                 <label>Mô Tả Chi Tiết</label>
-                <textarea name="product_content" id="product_content" class="form-control">{{ old('product_content') }}</textarea>
+                <textarea name="product_content" id="product_content" class="form-control">{!! old('product_content') !!}</textarea>
             </div>
 
             <div class="col-md-6">

@@ -137,7 +137,10 @@
     @else
         <div class="text-center"><h2>Giỏ hàng trống</h2></div>
     @endif
-    <a href="{{ route('orders.index') }}" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
-                                    Tra Cứu Hóa Đơn
-                                </a>
+    <div class="container" style="display: flex; justify-content: center; align-items: center; ">
+        <div class="d-flex justify-content-center my-4">
+        <a href="{{ route('orders.index') }}" class="btn btn-primary d-flex justify-content-center align-items-center" style="border-radius: 25px; height: 50px;">Tra Cứu Hóa Đơn</a>
+
+            </div>
+    </div>
 @endsection

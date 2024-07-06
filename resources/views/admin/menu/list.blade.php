@@ -2,27 +2,6 @@
 
 @section('content')
 <div class="container">
-    <!-- <div class="row mb-3" style="height:30px;">
-            <div class="col">
-                <h2 class="float-left">Danh mục sản phẩm</h2>
-            </div>
-            <div style="display:flex;">
-                <form action="{{ route('menus.search') }}" method="GET" class="mb-4">
-                    <div class="input-group">
-                        <input type="text" name="query" class="form-control" placeholder="Nhập từ khóa tìm kiếm" >
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-primary">Tìm kiếm</button>
-                        </div>
-                    </div>
-                </form>
-                <div class="col " style="">
-                    <a class="btn btn-primary" href="{{ route('menus.add') }}">
-                        <i class="fas fa-plus"></i> Thêm danh mục
-                    </a>
-                </div>
-            </div>
-    </div> -->
-
     <!-- header -->
     <div class="row mb-3">
     <div class="col-12 col-md-6 d-flex align-items-center">
@@ -42,8 +21,6 @@
         </a>
     </div>
 </div>
-
-
 
         <table class="table">
             <thead style="background-color: #28a745; color: white;">
@@ -79,6 +56,9 @@
             @endforeach
             </tbody>
         </table>
+    </div>
+    <div class="card-footer clearfix">
+        {!! $menus->links('pagination') !!}
     </div>
 @endsection
 
