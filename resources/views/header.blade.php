@@ -1,8 +1,8 @@
 <header>
 @php 
 $menusHtml = \App\Helpers\Helper::menus($menus); 
-$isLoggedIn = auth()->check();
-$user = auth()->user();
+$isLoggedIn = auth('client')->check();
+$user = auth('client')->user();
 @endphp
     <!-- Header desktop -->
     <style>

@@ -14,20 +14,6 @@ class LoginController extends Controller
     }
 
     public function store(Request $request){
-        // $this->validate($request, [
-        //     'email'=>'required|email:filter',
-        //     'password'=>'required'
-        // ]);
-
-        // if(Auth::attempt([
-        //     'email'=>$request->input('email'),
-        //     'password'=>$request->input('password')
-        //     ])) {
-        //     return redirect()->route('admin.main');
-        // }
-
-        // Session::flash('error','Email hoặc Password không chính xác!');
-        // return redirect()->back();
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
@@ -35,8 +21,8 @@ class LoginController extends Controller
     
         $credentials = $request->only('email', 'password');
     
-        if (Auth::attempt($credentials) && Auth::user()->isAdmin()) {
-            $request->session()->regenerate();
+        if (Auth::guard('admin')->attempt($credentials)) {
+            // $request->session()->regenerate();
 
             return redirect()->route('admin.main'); 
         }

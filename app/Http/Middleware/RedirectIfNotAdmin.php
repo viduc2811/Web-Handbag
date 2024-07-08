@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 
-class RedirectIfNotClient
+class RedirectIfNotAdmin
 {
     /**
      * Handle an incoming request.
@@ -16,9 +16,8 @@ class RedirectIfNotClient
      */
     public function handle(Request $request, Closure $next): Response
 {
-    if (!auth('client')->check() || !auth('client')->user()->isClient()) {
-        // abort(403, 'Unauthorized action.');
-        return redirect('/client/login');
+    if (!Auth('admin')->check() || !Auth('admin')->user()->isAdmin()) {
+        return redirect('/admin/users/login');
     }
     return $next($request);
 }

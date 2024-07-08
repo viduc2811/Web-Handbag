@@ -41,7 +41,7 @@
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">
+                            <a class="nav-link active" href="{{ route('admin.main') }}">
                             <i class="fas fa-users"></i>   Bảng Điều Khiển
                             </a>
                         </li>
@@ -63,11 +63,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('customers') }}">
                                 <i class="fas fa-file-alt"></i> Hóa Đơn
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-file-alt"></i> Chi Tiết Hóa Đơn
                             </a>
                         </li>
                         <li class="nav-item">

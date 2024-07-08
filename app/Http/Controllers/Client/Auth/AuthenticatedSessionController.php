@@ -22,19 +22,12 @@ class AuthenticatedSessionController extends Controller
 
     $credentials = $request->only('email', 'password');
 
-    if (Auth::attempt($credentials)) {
-        if (Auth::user()->isClient()) {
-            $request->session()->regenerate(); // Regenerate session để ngăn chặn session fixation attacks
+    if (Auth::guard('client')->attempt($credentials)) {
+        // $request->session()->regenerate();
 
-            return redirect()->route('home'); // Chuyển hướng đến route 'home' sau khi đăng nhập thành công
-        }
-
-        // Nếu người dùng không phải là client, đăng xuất và báo lỗi
-        Auth::logout();
-        return back()->withErrors([
-            'email' => 'Vui lòng đăng nhập',
-        ]);
+        return redirect()->route('home'); 
     }
+
     return back()->withErrors([
         'email' => 'Email hoặc Password không chính xác',
     ]);
@@ -43,8 +36,8 @@ class AuthenticatedSessionController extends Controller
     public function destroy()
     {
         Auth::guard('client')->logout(); 
-        request()->session()->invalidate(); 
-        request()->session()->regenerateToken(); 
+        // request()->session()->invalidate(); 
+        // request()->session()->regenerateToken(); 
 
         return redirect()->route('client.login');
 
