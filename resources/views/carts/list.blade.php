@@ -1,6 +1,10 @@
 @extends('main')
 
 @section('content')
+@php
+$user = auth('client')->user(); // Lấy thông tin người dùng đã đăng nhập
+        $email = $user->email;
+@endphp
     <form class="bg0 p-t-130 p-b-85" method="post" action="">
         @csrf
         @include('admin.alert')
@@ -25,7 +29,6 @@
 
                                     @foreach($products as $key => $product)
                                         @php
-                                            // Kiểm tra nếu $carts có chứa khóa $product->id
                                             if (!array_key_exists($product->product_id, $carts)) {
                                                 continue;
                                             }
@@ -102,6 +105,10 @@
                                         </span>
 
                                         <div class="bor8 bg0 m-b-12">
+                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" value="{{ $email }}" name="email" placeholder="Email Liên Hệ" readonly>
+                                        </div>
+                                        
+                                        <div class="bor8 bg0 m-b-12">
                                             <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="name" placeholder="Tên khách Hàng" required>
                                         </div>
 
@@ -113,9 +120,7 @@
                                             <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="address" placeholder="Địa Chỉ Giao Hàng">
                                         </div>
 
-                                        <div class="bor8 bg0 m-b-12">
-                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="email" placeholder="Email Liên Hệ">
-                                        </div>
+                                        
 
                                         <div class="bor8 bg0 m-b-12">
                                             <textarea class="cl8 plh3 size-111 p-lr-15" name="content" placeholder="Ghi Chú"></textarea>
@@ -139,7 +144,7 @@
     @endif
     <div class="container" style="display: flex; justify-content: center; align-items: center; ">
         <div class="d-flex justify-content-center my-4">
-        <a href="{{ route('orders.index') }}" class="btn btn-primary d-flex justify-content-center align-items-center" style="border-radius: 25px; height: 50px;">Tra Cứu Hóa Đơn</a>
+        <a href="{{ route('orders.search') }}" class="btn btn-primary d-flex justify-content-center align-items-center" style="border-radius: 25px; height: 50px;">Tra Cứu Hóa Đơn</a>
 
             </div>
     </div>

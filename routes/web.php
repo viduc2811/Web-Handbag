@@ -110,12 +110,7 @@ Route::middleware(['client'])->group(function () {
 
     // Tìm kiếm sản phẩm
     Route::get('/search', [\App\Http\Controllers\ProductController::class, 'search'])->name('search');
-
     Route::get('order-detail/{customer}',[\App\Http\Controllers\Admin\CartController::class, 'order'])->name('order-detail/{customer}');
-
-
-    Route::get('/orders',[\App\Http\Controllers\OrderController::class, 'index'])->name('orders.index');
-    // Route::post('/orders', [\App\Http\Controllers\OrderController::class, 'createOrder'])->name('order.create');
     Route::get('/orders/search', [\App\Http\Controllers\OrderController::class, 'search'])->name('orders.search');
 
 });

@@ -56,7 +56,7 @@ $user = auth('client')->user();
                             <i class="zmdi zmdi-shopping-cart"></i>
                         </div>
                         <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
-                                Xin chào, {{ $user->name }}</div>
+                                {{ $user->name }}</div>
                         <a href="{{ route('client.logout') }}" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             Đăng xuất
                         </a>

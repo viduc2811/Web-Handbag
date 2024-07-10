@@ -18,7 +18,7 @@
             <th style="width: 50px">ID</th>
             <th>Tên</th>
             <th>Email</th>
-            <th>Update</th>
+            <th>Ngày tạo</th>
             <!-- <th style="width: 100px">&nbsp;</th> -->
         </tr>
         </thead>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Cart;
 use App\Models\Customer;
 use App\Models\Product;
@@ -26,61 +27,29 @@ class OrderController extends Controller
             'orders' => $orders,
             'customers' => $customers,
             'carts' => $carts
- // Use comma instead of compact() function
         ]);
     }
     
-//     public function search(Request $request)
-// {
-//     $name = $request->input('name');
-//     $phone = $request->input('phone');
-//     $email = $request->input('email');
-
-//     $orders = Order::select('orders.*', 'customers.name as customer_name')
-//                   ->join('customers', 'orders.customer_id', '=', 'customers.id')
-//                   ->where(function ($query) use ($name, $phone, $email) {
-//                       if (!empty($name)) {
-//                           $query->where('customers.name', 'like', "%$name%");
-//                       }
-//                       if (!empty($phone)) {
-//                           $query->where('customers.phone', 'like', "%$phone%");
-//                       }
-//                       if (!empty($email)) {
-//                           $query->where('customers.email', 'like', "%$email%");
-//                       }
-//                   })
-//                   ->orderByDesc('orders.created_at')
-//                   ->get();
-
-//     return view('order', [
-//         'title' => 'Order',
-//         'orders' => $orders,
-//     ]);
-// }
 public function search(Request $request)
 {
-    $name = $request->input('name');
-    $phone = $request->input('phone');
-    $email = $request->input('email');
-    $query = $request->input('query');
-    // Kiểm tra người dùng nhập đủ thông tin
-    if (empty($name) || empty($phone) || empty($email)) {
-        return redirect()->back()->with('error', 'Vui lòng nhập đầy đủ thông tin để tìm kiếm đơn hàng.');
-    }
+    $user = auth('client')->user();
+        if (!$user) {
+            return redirect()->back()->with('error', 'Bạn phải đăng nhập để tra cứu hóa đơn.');
+        }
 
-    // Tìm kiếm đơn hàng
-    $orders = Order::join('customers', 'orders.customer_id', '=', 'customers.id')
-                    ->where('customers.name', 'like', '%' . $name . '%')
-                    ->where('customers.phone', 'like', '%' . $phone . '%')
-                    ->where('customers.email', 'like', '%' . $email . '%')
+        $email = $user->email;
+
+        // Tìm kiếm đơn hàng dựa trên email
+        $orders = DB::table('orders')
+                    ->join('customers', 'orders.customer_id', '=', 'customers.id')
+                    ->where('customers.email', $email)
                     ->select('orders.*', 'customers.name as customer_name')
                     ->orderByDesc('orders.created_at')
                     ->get();
 
-    // Trả về view với kết quả tìm kiếm
-    $title = 'Kết quả tìm kiếm đơn hàng';
-    return view('orders.list', compact('orders', 'query'))->with('title', 'Tìm kiếm');
-    // return view('orders.list', compact('orders', 'title'));
+        $title = 'Kết quả tìm kiếm đơn hàng';
+        return view('orders.list', compact('orders', 'title'));
+    
 }
 
 public function showRevenue()
