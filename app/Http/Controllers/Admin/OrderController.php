@@ -11,14 +11,26 @@ class OrderController extends Controller
 {
     public function index()
     {
-        // Lấy danh sách đơn hàng
         $orders = Order::orderBy('created_at', 'desc')->paginate(10); 
-        
-        // Lấy danh sách khách hàng
         $customers = Customer::orderBy('created_at', 'desc')->paginate(10); 
+        return view('admin.orders.list', compact('orders', 'customers'));
+    }
+    public function update(Request $request, Order $order) //Cập nhật trạng thái
+    {
+        $request->validate([
+            'status' => 'required|in:Đang chuẩn bị,Đang vận chuyển,Hoàn thành,Hủy',
+        ]);
 
-        // Trả về view 'admin.carts.customer' và truyền biến 'orders' và 'customers'
-        return view('admin.carts.customer', compact('orders', 'customers'));
+        $order->status = $request->status;
+        $order->save();
+
+        return redirect()->back()->with('success', 'Cập nhật trạng thái đơn hàng thành công.');
+    }
+    public function showDetail($id)
+    {
+        $order = Order::find($id);
+        $title = 'Chi tiết đơn hàng Admin' . $order->order_id;
+        return view('admin.orders.order-detail', compact('order','title'));
     }
     
 }

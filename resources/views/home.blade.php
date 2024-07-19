@@ -3,7 +3,7 @@
 @php
 use App\Models\Product;
 use Carbon\Carbon;
-$fiveDaysAgo = Carbon::now()->subDays(5);
+$fiveDaysAgo = Carbon::now()->subDays(15);
 $newProducts = Product::where('created_at', '>=', $fiveDaysAgo)->paginate(16);
 @endphp
 

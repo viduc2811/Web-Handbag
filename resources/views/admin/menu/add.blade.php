@@ -23,19 +23,19 @@ referrerpolicy="origin"></script>
             </div>
 
             <div class="form-group">
-                <label for="slug">Slug</label>
+                <label for="slug">Đường dẫn</label>
                 <input type="text" class="form-control " id="menu-slug" name="slug" value="{{ old('slug') }}">
                 
             </div>
 
             <div class="form-group">
-                <label for="description">Description</label>
+                <label for="description">Mô tả</label>
                 <textarea class="form-control " id="menu-description" name="menu_description">{{ old('description') }}</textarea>
                 
             </div>
 
             <div class="form-group">
-                <label for="parent_id">Parent_id</label>
+                <label for="parent_id">Danh mục cha</label>
                 <select class="form-control " id="parent-id" name="parent_id" >
                     <option value="0">Danh mục cha</option>
                     @foreach($menus as $menu)
@@ -44,7 +44,7 @@ referrerpolicy="origin"></script>
                 </select>
                 
             </div>
-            <button type="submit" class="btn btn-primary">Create Category</button>
+            <button type="submit" class="btn btn-primary">Tạo danh mục</button>
            
             @csrf
        

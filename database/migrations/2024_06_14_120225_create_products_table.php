@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('price_sale')->nullable();
             $table->integer('active');
             $table->timestamps();
+            $table->foreign('menu_id')->references('menu_id')->on('menus')->onDelete('cascade');
         });
     }
 

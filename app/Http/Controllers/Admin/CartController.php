@@ -17,30 +17,30 @@ class CartController extends Controller
 
     public function index()
     {
-        return view('admin.carts.customer', [
+        return view('admin.orders.list', [
             'title' => 'Danh Sách Đơn Đặt Hàng',
             'customers' => $this->cart->getCustomer()
         ]);
     }
 
-    public function show(Customer $customer)
-    {
-        $carts = $this->cart->getProductForCart($customer);
+    // public function show(Customer $customer)
+    // {
+    //     $carts = $this->cart->getProductForCart($customer);
 
-        return view('admin.carts.order-detail', [
-            'title' => 'Chi Tiết Đơn Hàng: ' . $customer->name,
-            'customer' => $customer,
-            'carts' => $carts
-        ]);
-    }
-    public function order(Customer $customer)
-    {
-        $carts = $this->cart->getProductForCart($customer);
+    //     return view('admin.orders.order-detail', [
+    //         'title' => 'Chi Tiết Đơn Hàng: ' . $customer->name,
+    //         'customer' => $customer,
+    //         'carts' => $carts
+    //     ]);
+    // }
+    // public function order(Customer $customer)
+    // {
+    //     $carts = $this->cart->getProductForCart($customer);
 
-        return view('order', [
-            'title' => 'Đơn Hàng: ' . $customer->name,
-            'customer' => $customer,
-            'carts' => $carts
-        ]);
-    }
+    //     return view('order', [
+    //         'title' => 'Đơn Hàng: ' . $customer->name,
+    //         'customer' => $customer,
+    //         'carts' => $carts
+    //     ]);
+    // }
 }

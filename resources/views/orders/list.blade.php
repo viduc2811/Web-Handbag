@@ -10,13 +10,14 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>Mã hóa đơn</th>
                         <th>Tên Khách Hàng</th>
                         <th>Số Điện Thoại</th>
                         <th>Địa Chỉ</th>
                         <th>Email</th>
                         <th>Ghi Chú</th>
                         <th>Tổng Tiền</th>
+                        <th>Trạng thái</th>
                         <th>Ngày Đặt</th>
                     </tr>
                 </thead>
@@ -30,7 +31,14 @@
                             <td>{{ $order->email }}</td>
                             <td>{{ $order->content }}</td>
                             <td>{{ number_format($order->total_amount, 0, '', '.') }}</td>
+                            <td>{{ $order->status }}</td>
                             <td>{{ $order->created_at }}</td>
+                            <td>
+                                <a href="{{ route('order.detail', ['order_id' => $order->order_id]) }}" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
+                                <a href="{{ route('order.edit', ['order_id' => $order->order_id]) }}" class="btn btn-primary btn-sm" title="Sửa thông tin">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

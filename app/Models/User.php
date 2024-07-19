@@ -42,7 +42,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-        const ROLE_CLIENT = 0;
+    const ROLE_CLIENT = 0;
     const ROLE_ADMIN = 1;
 
     public function isClient()

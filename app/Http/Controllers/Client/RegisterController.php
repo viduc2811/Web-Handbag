@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Client\Auth;
+namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class RegisteredUserController extends Controller
+class RegisterController extends Controller
 {
     public function create()
     {
-        return view('client.auth.register');
+        return view('client.register');
     }
 
     public function store(Request $request)

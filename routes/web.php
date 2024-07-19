@@ -23,8 +23,8 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\Users\UserController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\Client\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Client\Auth\RegisteredUserController;
+use App\Http\Controllers\Client\LoginUserController;
+use App\Http\Controllers\Client\RegisteredUserController;
 
 // Đăng nhập
 Route::get('admin/users/login', [LoginController::class,'index'])->name('login');
@@ -40,17 +40,12 @@ Route::get('admin/users/register', [RegisterController::class, 'index'])->name('
 Route::post('admin/users/register', [RegisterController::class, 'store']);
 
 
-// Route::get('/client/login', [ClientController::class, 'showLoginForm'])->name('client.login');
-// Route::post('/client/login', [ClientController::class, 'store'])->name('client.login.store');
-
-
-
 Route::prefix('client')->group(function () {
-    Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('client.login');
-    Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+    Route::get('/login', [LoginUserController::class, 'create'])->name('client.login');
+    Route::post('/login', [LoginUserController::class, 'store']);
     Route::get('/register', [RegisteredUserController::class, 'create'])->name('client.register');
     Route::post('/register', [RegisteredUserController::class, 'store']);
-    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('client.logout'); // Thêm route đăng xuất
+    Route::post('/logout', [LoginUserController::class, 'destroy'])->name('client.logout'); 
 
 });
 
@@ -91,48 +86,40 @@ Route::middleware(['admin'])->group(function () {
         Route::post('upload/services', [\App\Http\Controllers\Admin\UploadController::class, 'store']);
         
         Route::get('customers', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('customers');
-        Route::get('customers/view/{customer}', [\App\Http\Controllers\Admin\CartController::class, 'show'])->name('admin.customers.view');
+        Route::put('customers/{order}', [\App\Http\Controllers\Admin\OrderController::class, 'update'])->name('customers.update');
+        Route::get('/order/detail/{order_id}',[\App\Http\Controllers\Admin\OrderController::class, 'showDetail'])->name('admin.order.detail');
+
     });
 });
 
 Route::get('/', [App\Http\Controllers\MainController::class, 'index'])->name('home');
 Route::middleware(['client'])->group(function () {
-        // Route::get('/', [App\Http\Controllers\MainController::class, 'index'])->name('home');
-    // Route::post('/services/load-product', [App\Http\Controllers\MainController::class, 'loadProduct']);
-    // Route::get('danh-muc/{id}-{slug}.html', [App\Http\Controllers\MenuController::class, 'index']);
-    // Route::get('san-pham/{id}-{slug}.html', [App\Http\Controllers\ProductController::class, 'index']);
-
     Route::post('add-cart', [App\Http\Controllers\CartController::class, 'index']);
     Route::get('carts', [App\Http\Controllers\CartController::class, 'show']);
     Route::post('update-cart', [App\Http\Controllers\CartController::class, 'update']);
     Route::get('carts/delete/{cart_id}', [App\Http\Controllers\CartController::class, 'remove']);
     Route::post('carts', [App\Http\Controllers\CartController::class, 'addCart']);
 
-    // Tìm kiếm sản phẩm
-    Route::get('/search', [\App\Http\Controllers\ProductController::class, 'search'])->name('search');
-    Route::get('order-detail/{customer}',[\App\Http\Controllers\Admin\CartController::class, 'order'])->name('order-detail/{customer}');
+    // Route::get('order-detail/{customer}',[\App\Http\Controllers\Admin\CartController::class, 'order'])->name('order-detail/{customer}');
     Route::get('/orders/search', [\App\Http\Controllers\OrderController::class, 'search'])->name('orders.search');
 
+    Route::get('/order/detail/{order_id}',[\App\Http\Controllers\OrderController::class, 'showDetail'])->name('order.detail');
+
+        //Sửa thông tin vận chuyển
+    Route::get('/orders/{order_id}/edit', [\App\Http\Controllers\OrderController::class, 'edit'])->name('order.edit');
+    Route::put('/orders/{order_id}', [\App\Http\Controllers\OrderController::class, 'updateInfor'])->name('order.update');
+
+    Route::get('/{id}/change-password', [AuthenticatedSessionController::class, 'changePasswordForm'])->name('client.change-password');
+    Route::post('/{id}/update-password', [AuthenticatedSessionController::class, 'updatePassword'])->name('client.change-password.update');
+
 });
-// Route::get('/', [App\Http\Controllers\MainController::class, 'index'])->name('/');
+
 Route::post('/services/load-product', [App\Http\Controllers\MainController::class, 'loadProduct']);
 Route::get('danh-muc/{id}-{slug}.html', [App\Http\Controllers\MenuController::class, 'index']);
 Route::get('san-pham/{id}-{slug}.html', [App\Http\Controllers\ProductController::class, 'index']);
 
-// Route::post('add-cart', [App\Http\Controllers\CartController::class, 'index']);
-// Route::get('carts', [App\Http\Controllers\CartController::class, 'show']);
-// Route::post('update-cart', [App\Http\Controllers\CartController::class, 'update']);
-// Route::get('carts/delete/{cart_id}', [App\Http\Controllers\CartController::class, 'remove']);
-// Route::post('carts', [App\Http\Controllers\CartController::class, 'addCart']);
+// Tìm kiếm sản phẩm
+Route::get('/search', [\App\Http\Controllers\ProductController::class, 'search'])->name('search');
 
-// // Tìm kiếm sản phẩm
-// Route::get('/search', [\App\Http\Controllers\ProductController::class, 'search'])->name('search');
-
-// Route::get('order-detail/{customer}',[\App\Http\Controllers\Admin\CartController::class, 'order'])->name('order-detail/{customer}');
-
-
-// Route::get('/orders',[\App\Http\Controllers\OrderController::class, 'index'])->name('orders.index');
-// // Route::post('/orders', [\App\Http\Controllers\OrderController::class, 'createOrder'])->name('order.create');
-// Route::get('/orders/search', [\App\Http\Controllers\OrderController::class, 'search'])->name('orders.search');
 
 

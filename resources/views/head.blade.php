@@ -32,4 +32,7 @@
 <link rel="stylesheet" type="text/css" href="/template/css/main.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="/template/css/style.css">
+<link rel="stylesheet" href="/template/admin/plugins/fontawesome-free/css/all.min.css">
+  <!-- icheck bootstrap -->
+
 <meta name="csrf-token" content="{{ csrf_token() }}">

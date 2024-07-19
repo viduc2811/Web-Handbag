@@ -24,7 +24,7 @@ referrerpolicy="origin"></script>
     </div>
 
     <div class="form-group">
-        <label for="slug">Slug</label>
+        <label for="slug">Đường dẫn</label>
         <input type="text" class="form-control" id="slug" name="slug" value="{{ old('slug', $menu->slug) }}">
     </div>
 

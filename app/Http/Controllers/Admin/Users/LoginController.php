@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -20,10 +22,16 @@ class LoginController extends Controller
         ]);
     
         $credentials = $request->only('email', 'password');
-    
         if (Auth::guard('admin')->attempt($credentials)) {
-            // $request->session()->regenerate();
+            $user = Auth::guard('admin')->user();
+            if (!$user->isAdmin()) {
+                Auth::guard('admin')->logout();
+                return back()->withErrors([
+                    'email' => 'Bạn không có quyền truy cập vào trang này.',
+                ]);
+            }
 
+            // $request->session()->regenerate();
             return redirect()->route('admin.main'); 
         }
     
@@ -31,4 +39,6 @@ class LoginController extends Controller
             'email' => 'Email hoặc Password không chính xác',
         ]);
     }
+
+    
 }

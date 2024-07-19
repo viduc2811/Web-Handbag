@@ -20,12 +20,10 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::orderByDesc('created_at')->get();
-        $customers = Customer::orderByDesc('created_at')->get();
         $carts = Cart::orderByDesc('created_at')->get();
         return view('orders.search', [
-            'title' => 'Order',
+            'title' => 'Danh sách hóa đơn',
             'orders' => $orders,
-            'customers' => $customers,
             'carts' => $carts
         ]);
     }
@@ -51,18 +49,43 @@ public function search(Request $request)
         return view('orders.list', compact('orders', 'title'));
     
 }
+    public function showDetail($id)
+    {
+        $order = Order::find($id);
+        $title = 'Chi tiết đơn hàng ' . $order->order_id;
+        return view('orders.order-detail', compact('order','title'));
+    }
+    public function edit($order_id) //sửa thông tin vận chuyển
+    {
+        $order = Order::findOrFail($order_id);
+    $title = 'Sửa thông tin vận chuyển'; 
 
-public function showRevenue()
-{
-    // Lấy dữ liệu doanh thu theo ngày từ database
-    $revenues = DB::table('orders')
-        ->select(DB::raw('DATE(created_at) as date'), DB::raw('SUM(total_amount) as total_revenue'))
-        ->groupBy('date')
-        ->orderBy('date', 'desc')
-        ->get();
+    return view('orders.edit', compact('order', 'title'));
+    }
+    public function updateInfor(Request $request, $order_id)
+    {
+        $request->validate([
+            'customer_name' => 'required',
+            'phone' => 'required|regex:/[0-9]{9,10}/', 
+            'address' => 'required',
+            
+        ], [
+            'customer_name.required' => 'Vui lòng nhập tên khách hàng',
+            'phone.required' => 'Vui lòng nhập số điện thoại',
+            'phone.regex' => 'Số điện thoại không hợp lệ',
+            'address.required' => 'Vui lòng nhập địa chỉ',
+            
+            
+        ]);
+        $order = Order::findOrFail($order_id);
+        
+        $order->customer_name = $request->input('customer_name');
+        $order->phone = $request->input('phone');
+        $order->address = $request->input('address');
+        $order->content = $request->input('content');
 
-    return view('admin.revenue', compact('revenues'));
-}
+        $order->save();
 
-
+        return redirect()->route('order.detail', ['order_id' => $order->order_id])->with('success', 'Cập nhật thông tin đơn hàng thành công');
+    }
 }

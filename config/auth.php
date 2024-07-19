@@ -42,11 +42,11 @@ return [
         // ],
         'client' => [
         'driver' => 'session',
-        'provider' => 'clients',
+        'provider' => 'users',
     ],
     'admin' => [
         'driver' => 'session',
-        'provider' => 'admins',
+        'provider' => 'users',
     ],
     ],
 
@@ -68,19 +68,19 @@ return [
     */
 
     'providers' => [
-        // 'users' => [
-        //     'driver' => 'eloquent',
-        //     'model' => App\Models\User::class,
-        // ],
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
         
-        'clients' => [
-        'driver' => 'eloquent',
-        'model' => App\Models\User::class,
-    ],
-    'admins' => [
-        'driver' => 'eloquent',
-        'model' => App\Models\User::class,
-    ],
+    //     'clients' => [
+    //     'driver' => 'eloquent',
+    //     'model' => App\Models\User::class,
+    // ],
+    // 'admins' => [
+    //     'driver' => 'eloquent',
+    //     'model' => App\Models\User::class,
+    // ],
     ],
 
     /*

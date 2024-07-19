@@ -109,21 +109,21 @@ $user = auth('client')->user(); // Lấy thông tin người dùng đã đăng n
                                         </div>
                                         
                                         <div class="bor8 bg0 m-b-12">
-                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="name" placeholder="Tên khách Hàng" required>
+                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="name" value="{{ old('name')}}" placeholder="Tên khách Hàng" required>
                                         </div>
 
                                         <div class="bor8 bg0 m-b-12">
-                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="phone" placeholder="Số Điện Thoại" required>
+                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="phone" value="{{ old('phone')}}" placeholder="Số Điện Thoại" required>
                                         </div>
 
                                         <div class="bor8 bg0 m-b-12">
-                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="address" placeholder="Địa Chỉ Giao Hàng">
+                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" value="{{ old('address')}}" name="address" placeholder="Địa Chỉ Giao Hàng">
                                         </div>
 
                                         
 
                                         <div class="bor8 bg0 m-b-12">
-                                            <textarea class="cl8 plh3 size-111 p-lr-15" name="content" placeholder="Ghi Chú"></textarea>
+                                            <textarea class="cl8 plh3 size-111 p-lr-15" name="content"  placeholder="Ghi Chú">{{old('content')}}</textarea>
                                         </div>
                                     </div>
                                 </div>

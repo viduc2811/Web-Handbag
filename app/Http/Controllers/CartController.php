@@ -35,7 +35,7 @@ class CartController extends Controller
         return view('carts.list', [
             'title' => 'Giỏ Hàng',
             'products' => $products,
-            'carts' => $cartProducts // Truyền giỏ hàng vào view
+            'carts' => $cartProducts 
         ]);
     }
 
@@ -47,10 +47,10 @@ class CartController extends Controller
         $result = $this->cartService->update($request);
 
         if (!$result['success']) {
-            return redirect()->back()->withErrors([$result['message']]);
+            return redirect()->back()->withErrors([$result['message']])->withInput();
         }
 
-        return redirect()->back()->with('success', $result['message']);
+        return redirect()->back()->with('success', $result['message'])->withInput();
     }
 
     public function remove($id = 0)

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('email');
             $table->text('content')->nullable();
             $table->decimal('total_amount', 10, 2);
+            $table->string('status')->default('đang chuẩn bị');
             $table->timestamps();
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
         });

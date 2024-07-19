@@ -70,10 +70,5 @@ class Kernel extends HttpKernel
         
 
     ];
-    
-//     protected $routeMiddleware = [
-//         'client' => \App\Http\Middleware\RedirectIfNotClient::class,
-//         'admin' => \App\Http\Middleware\RedirectIfNotAdmin::class,
-// ];
 
 }

@@ -34,8 +34,8 @@
             <th>Giá Gốc</th>
             <th>Giá Khuyến Mãi</th>
             <th>Số lượng</th>
-            <th>Active</th>
-            <th>Update</th>
+            <th>Kích hoạt</th>
+            <th>Thời gian</th>
             <th style="width: 100px">&nbsp;</th>
         </tr>
         </thead>
