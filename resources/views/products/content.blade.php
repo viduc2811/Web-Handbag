@@ -33,12 +33,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="wrap-slick3-arrows flex-sb-m flex-w">
-                                <button class="arrow-slick3 prev-slick3 slick-arrow" style=""><i
-                                        class="fa fa-angle-left" aria-hidden="true"></i></button>
-                                <button class="arrow-slick3 next-slick3 slick-arrow" style=""><i
-                                        class="fa fa-angle-right" aria-hidden="true"></i></button>
-                            </div>
+                           
 
                             <div class="slick3 gallery-lb slick-initialized slick-slider slick-dotted">
                                 <div class="slick-list draggable">
@@ -46,16 +41,12 @@
                                         <div class="item-slick3 slick-slide slick-current slick-active"
                                              data-thumb="images/product-detail-01.jpg" data-slick-index="0"
                                              aria-hidden="false"
-                                             style="width: 513px; position: relative; left: 0px; top: 0px; z-index: 999; opacity: 1;"
+                                             style="width: 500px; height: 600px; position: relative; left: 0px; top: 0px; z-index: 999; opacity: 1;"
                                              tabindex="0" role="tabpanel" id="slick-slide10"
                                              aria-describedby="slick-slide-control10">
                                             <div class="wrap-pic-w pos-relative">
                                                 <img src="{{ $product->thumb }}" alt="IMG-PRODUCT">
 
-                                                <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                                                   href="images/product-detail-01.jpg" tabindex="0">
-                                                    <i class="fa fa-expand"></i>
-                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -117,30 +108,7 @@
                         </div>
 
                         <!--  -->
-                        <div class="flex-w flex-m p-l-100 p-t-40 respon7">
-                            <div class="flex-m bor9 p-r-10 m-r-11">
-                                <a href="#"
-                                   class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100"
-                                   data-tooltip="Add to Wishlist">
-                                    <i class="zmdi zmdi-favorite"></i>
-                                </a>
-                            </div>
-
-                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-                               data-tooltip="Facebook">
-                                <i class="fa fa-facebook"></i>
-                            </a>
-
-                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-                               data-tooltip="Twitter">
-                                <i class="fa fa-twitter"></i>
-                            </a>
-
-                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-                               data-tooltip="Google Plus">
-                                <i class="fa fa-google-plus"></i>
-                            </a>
-                        </div>
+                       
                     </div>
                 </div>
             </div>
@@ -164,9 +132,6 @@
 
                             </div>
                         </div>
-
-                       
-                       
 
         <div class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
 

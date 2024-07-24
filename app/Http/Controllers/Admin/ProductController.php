@@ -9,9 +9,7 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function __construct(ProductAdminService $productService)
     {
         $this->productService = $productService;
@@ -25,9 +23,7 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+  
     public function create()
     {
         return view('admin.product.add', [
@@ -36,18 +32,14 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+ 
     public function store(ProductRequest $request)
     {
         $this->productService->insert($request);
         return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(Product $product)
     {
         return view('admin.product.edit', [
@@ -57,17 +49,11 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Product $product)
     {
         $result = $this->productService->update($request, $product);
@@ -78,9 +64,6 @@ class ProductController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Request $request)
     {
         $result = $this->productService->delete($request);
@@ -97,11 +80,8 @@ class ProductController extends Controller
     {
         $query = $request->input('query');
 
-        // Xử lý tìm kiếm sản phẩm với từ khóa $query
         $products = Product::where('product_name', 'like', '%' . $query . '%')
                            ->get();
-
-        // Trả về view hiển thị kết quả tìm kiếm
         return view('admin.product.search', compact('products', 'query'))->with('title', 'Tìm kiếm');
     }
 }

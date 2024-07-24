@@ -63,16 +63,22 @@ class LoginUserController extends Controller
             'current_password' => 'required',
             'new_password' => 'required|min:8|different:current_password',
             'new_password_confirmation' => 'required|same:new_password',
-        ]);
+        ],
+        [
+            'current_password.required' => 'Vui lòng nhập mật khẩu hiện tại.',
+            'new_password.required' => 'Vui lòng nhập mật khẩu mới.',
+            'new_password.min' => 'Mật khẩu mới phải có ít nhất 8 ký tự.',
+            'new_password.different' => 'Mật khẩu mới phải khác mật khẩu hiện tại.',
+            'new_password_confirmation.required' => 'Vui lòng nhập mật khẩu xác nhận.',
+            'new_password_confirmation.same' => 'Mật khẩu mới và xác nhận mật khẩu phải khớp.',
+        ]
+    );
 
         $user = Auth::guard('client')->user();
-
-        // Kiểm tra mật khẩu hiện tại có đúng không
         if (!Hash::check($request->current_password, $user->password)) {
             return redirect()->back()->with('error', 'Mật khẩu hiện tại không chính xác.');
         }
 
-        // Đổi mật khẩu
         $user->password = Hash::make($request->new_password);
         $user->save();
 

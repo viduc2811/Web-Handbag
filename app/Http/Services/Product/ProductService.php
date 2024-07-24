@@ -12,7 +12,7 @@ class ProductService
 
     public function get($page = null)
     {
-        return Product::select('product_id', 'product_name', 'product_price', 'price_sale', 'thumb','product_quantity')
+        return Product::select('product_id', 'product_name', 'product_price', 'price_sale', 'thumb','product_quantity','cost_price')
             ->where('active', 1)
             ->orderByDesc('product_id')
             ->when($page != null, function ($query) use ($page) {
@@ -32,7 +32,7 @@ class ProductService
 
     public function more($id)
     {
-        return Product::select('product_id', 'product_name', 'product_price', 'price_sale', 'thumb','product_quantity')
+        return Product::select('product_id', 'product_name', 'product_price', 'price_sale', 'thumb','product_quantity','cost_price')
             ->where('active', 1)
             ->where('product_id', '!=', $id)
             ->orderByDesc('product_id')

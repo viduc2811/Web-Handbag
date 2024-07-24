@@ -43,6 +43,7 @@ class ProductAdminService
                 'menu_id' => $request->menu_id,
                 'product_price' => $request->product_price,
                 'price_sale' => $request->price_sale,
+                'cost_price' => $request->cost_price,//
                 'product_description' => $request->product_description,
                 'product_content' => $request->product_content,
                 'thumb' => $request->thumb,

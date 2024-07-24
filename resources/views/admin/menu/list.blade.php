@@ -5,7 +5,7 @@
     <!-- header -->
     <div class="row mb-3">
     <div class="col-12 col-md-6 d-flex align-items-center">
-        <h2 class="mb-0">Danh mục sản phẩm</h2>
+        <h2 class="mb-0">Danh Mục Sản Phẩm</h2>
     </div>
     <div class="col-12 col-md-6 d-flex justify-content-end">
         <form action="{{ route('menus.search') }}" method="GET" class="d-flex mb-0">
@@ -25,7 +25,7 @@
         <table class="table">
             <thead style="background-color: #28a745; color: white;">
                 <tr>
-                    <th style="width: 50px">ID</th>
+                    <th style="width: 50px">TT</th>
                     <th>Tên danh mục</th>
                     <th>Danh mục cha</th>
                     <th>Cập nhật</th>

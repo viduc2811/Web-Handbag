@@ -69,7 +69,7 @@ class MenuService
     public function getId($id)
     {
         return Menu::where('menu_id', $id)->firstOrFail();
-        dd($menu);
+        
     }
 
     public function getProduct($menu, $request)

@@ -13,6 +13,7 @@ class Product extends Model
         'product_content',
         'menu_id',
         'thumb',
+        'cost_price',//
         'product_price',
         'price_sale',
         'product_quantity',

@@ -33,4 +33,32 @@ class OrderController extends Controller
         return view('admin.orders.order-detail', compact('order','title'));
     }
     
+    public function searchByEmail(Request $request)
+    {
+       $email = $request->input('query');
+
+        $orders = Order::query()
+            ->where('email', 'LIKE', "%$email%")
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+    return view('admin.orders.list', compact('orders', 'email'));
+    }
+
+    public function filterByStatus(Request $request)
+    {
+        $status = $request->status;
+        $orders = Order::orderBy('created_at', 'desc')->paginate(10);
+        if ($status === 'Tất cả đơn hàng') {
+            $orders = Order::orderBy('created_at', 'desc')->paginate(10);
+        } elseif (empty($status)) {
+            session()->flash('message', 'Vui lòng chọn trạng thái để lọc đơn hàng.');
+        } else {
+            $orders = Order::where('status', $status)
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+        }
+    
+        return view('admin.orders.list', compact('orders'));
+    }
 }

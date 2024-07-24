@@ -44,6 +44,12 @@ referrerpolicy="origin"></script>
             </div>
 
             <div class="row">
+            <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="menu">Giá Nhập</label>
+                        <input type="number" name="cost_price" value="{{ $product->cost_price }}"  class="form-control" >
+                    </div>
+                </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="menu">Giá Gốc</label>

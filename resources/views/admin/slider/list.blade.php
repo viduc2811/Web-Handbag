@@ -1,10 +1,20 @@
 @extends('admin.main')
 
 @section('content')
+<div class="row mb-3">
+    <div class="col-12 col-md-6 d-flex align-items-center">
+        <h2 class="mb-0">Danh Sách Băng Chuyền</h2>
+    </div>
+    <div class="col-12 col-md-6 d-flex justify-content-end">
+        <a class="btn btn-primary ml-2" href="{{ route('sliders.add') }}" style="width:auto;">
+            <i class="fas fa-plus" ></i> Thêm Băng Chuyền
+        </a>
+    </div>
+</div>
     <table class="table">
-        <thead>
+        <thead style="background-color: #28a745; color: white;">
         <tr>
-            <th style="width: 50px">ID</th>
+            <th style="width: 50px">TT</th>
             <th>Tiêu Đề</th>
             <th>Link</th>
             <th>Ảnh</th>

@@ -13,7 +13,7 @@
 
 
     <table class="table">
-        <thead>
+        <thead style="background-color: #28a745; color: white;">
         <tr>
             <th style="width: 50px">ID</th>
             <th>Tên</th>

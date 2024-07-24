@@ -24,7 +24,7 @@ use App\Http\Controllers\Admin\Users\UserController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Client\LoginUserController;
-use App\Http\Controllers\Client\RegisteredUserController;
+use App\Http\Controllers\Client\RegisteredController;
 
 // Đăng nhập
 Route::get('admin/users/login', [LoginController::class,'index'])->name('login');
@@ -43,8 +43,8 @@ Route::post('admin/users/register', [RegisterController::class, 'store']);
 Route::prefix('client')->group(function () {
     Route::get('/login', [LoginUserController::class, 'create'])->name('client.login');
     Route::post('/login', [LoginUserController::class, 'store']);
-    Route::get('/register', [RegisteredUserController::class, 'create'])->name('client.register');
-    Route::post('/register', [RegisteredUserController::class, 'store']);
+    Route::get('/register', [RegisteredController::class, 'create'])->name('client.register');
+    Route::post('/register', [RegisteredController::class, 'store']);
     Route::post('/logout', [LoginUserController::class, 'destroy'])->name('client.logout'); 
 
 });
@@ -89,6 +89,9 @@ Route::middleware(['admin'])->group(function () {
         Route::put('customers/{order}', [\App\Http\Controllers\Admin\OrderController::class, 'update'])->name('customers.update');
         Route::get('/order/detail/{order_id}',[\App\Http\Controllers\Admin\OrderController::class, 'showDetail'])->name('admin.order.detail');
 
+   
+        Route::get('orders/search/email', [\App\Http\Controllers\Admin\OrderController::class, 'searchByEmail'])->name('admin.orders.searchByEmail');
+        Route::get('orders/filter/status', [\App\Http\Controllers\Admin\OrderController::class, 'filterByStatus'])->name('admin.orders.filterByStatus');
     });
 });
 
@@ -109,8 +112,8 @@ Route::middleware(['client'])->group(function () {
     Route::get('/orders/{order_id}/edit', [\App\Http\Controllers\OrderController::class, 'edit'])->name('order.edit');
     Route::put('/orders/{order_id}', [\App\Http\Controllers\OrderController::class, 'updateInfor'])->name('order.update');
 
-    Route::get('/{id}/change-password', [AuthenticatedSessionController::class, 'changePasswordForm'])->name('client.change-password');
-    Route::post('/{id}/update-password', [AuthenticatedSessionController::class, 'updatePassword'])->name('client.change-password.update');
+    Route::get('/{id}/change-password', [LoginUserController::class, 'changePasswordForm'])->name('client.change-password');
+    Route::post('/{id}/update-password', [LoginUserController::class, 'updatePassword'])->name('client.change-password.update');
 
 });
 

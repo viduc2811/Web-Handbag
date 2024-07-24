@@ -38,7 +38,7 @@
             <table class="table table-striped table-bordered">
                 <thead class="thead-dark">
                     <tr>
-                        <th>#</th>
+                        <th>TT</th>
                         <th>Tên sản phẩm</th>
                         <th>Số lượng</th>
                         <th>Đơn giá</th>

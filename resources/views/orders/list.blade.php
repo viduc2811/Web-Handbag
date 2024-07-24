@@ -10,7 +10,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Mã hóa đơn</th>
+                        <th>Mã </th>
                         <th>Tên Khách Hàng</th>
                         <th>Số Điện Thoại</th>
                         <th>Địa Chỉ</th>
